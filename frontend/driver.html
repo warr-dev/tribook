@@ -1,0 +1,786 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src *"> -->
+  <!-- script-src 'unsafe-inline'; connect-src * -->
+	<title>jQuery Mobile: Theme Download</title>
+	<link rel="stylesheet" href="themes/lightgreen.min.css" />
+	<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" href="css/jquery.mobile.structure-1.4.5.min.css" />
+	<script src="jquery-1.11.1.min.js"></script>
+	<script src="jquery.mobile-1.4.5.min.js"></script>
+  <link href="css/select2.min.css" rel="stylesheet" />
+		<script src="js/select2.min.js"></script>
+  <link rel="stylesheet" href="css/toastr.min.css">
+  <script src="js/toastr.min.js"></script>
+  <script>
+    var storage = window.localStorage;
+    let token=storage.getItem("token")
+    let host=storage.getItem("host") || "http://localhost:8000"
+    //host="192.168.43.97:8000"
+  </script>
+  <style>
+      .title{
+          font-weight: bolder;
+          font-size: 2rem !important;
+          text-transform: uppercase;
+          margin-bottom:-3rem;
+          margin-top:100px;
+      }
+      .btn{
+          width: 50vw !important;
+      }
+      .action{
+          margin-top: 3rem;
+      }
+      .center{
+          margin-top: 40vh;
+      }
+      .bg-green{
+          background-color: #31A49E;
+      }
+      .text-white{
+          color: white;
+      }
+      .loading{
+          width: 50vw;
+          animation: run 3s ease-in forwards;
+          
+      }
+      .blink{
+        animation: blink 2s ease-in both;
+          animation-iteration-count: infinite;
+      }
+      .title{
+        text-transform: uppercase;
+        font-weight: bolder;
+      }
+      .text-center{
+          text-align: center;
+      }
+      @keyframes run{
+        0%{
+          transform: translateX(-20%);
+        }
+        100%{
+        transform: translateX(110%);
+        }
+      }
+      @keyframes blink{
+        0%{
+          color: #4ec180;
+        }
+        50%{
+          color: #801c1c;
+        }
+        100%{
+          color: #4e801c;
+        }
+      }
+      .ui-selectmenu.ui-popup .ui-input-search {
+        margin-left: .5em;
+        margin-right: .5em;
+        }
+        .ui-selectmenu.ui-dialog .ui-content {
+        padding-top: 0;
+        }
+        .ui-selectmenu.ui-dialog .ui-selectmenu-list {
+        margin-top: 0;
+        }
+        .ui-selectmenu.ui-popup .ui-selectmenu-list li.ui-first-child .ui-btn {
+        border-top-width: 1px;
+        -webkit-border-radius: 0;
+        border-radius: 0;
+        }
+        .ui-selectmenu.ui-dialog .ui-header {
+        border-bottom-width: 1px;
+        }
+  </style>
+</head>
+<body>
+
+    
+<!-- Start of second page -->
+<div data-role="page" id="loading" class="bg-green">
+
+	<div role="main" class="ui-content content">
+    <div class="center">
+    </div>
+        <div class="text-white loading">
+            <center>
+                <h1 class="title">TRibOOk</h1>
+                <img src="img/logo.gif" class="logo" alt="logo">
+            </center>
+        </div>
+        <center class="text-white blink">
+            <h1>Software is loading...</h1>
+        </center>
+	</div><!-- /content -->
+</div><!-- /page -->
+
+
+
+<div id="logoutconfirm" data-role="page" data-overlay-theme="a" data-theme="a" data-dismissible="false" class="center">
+    <div data-role="header" data-theme="a">
+    <h1>Confirm Logout?</h1>
+    </div>
+    <div role="main" class="ui-content">
+        <h3 class="ui-title">Are you sure you want to logout your account?</h3>
+    <center>
+        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-rel="back" style="top:30px">Cancel</a>
+        <a href="#" id="logout" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-rel="back" data-transition="flow" style="top:30px">Confirm</a>
+    </center>
+    </div>
+</div>
+<!-- Start of main page -->
+<div data-role="page" id="home">
+
+	<div data-role="header" data-position="fixed" style="overflow:hidden;">
+		<h1>Home</h1>
+	    <a href="#" data-icon="back" class="ui-btn-left" style="top:10px">Back</a>
+        <a href="#logoutconfirm" data-transition="pop" data-icon="power" class="ui-btn-right " style="top:10px">Logout</a>
+	</div>
+
+	<div role="main" class="ui-content content">
+    <center>
+      <a href="#history" onclick="reservations()" class="ui-btn ui-corner-all ui-shadow">History</a>
+      <a href="#account" onclick="loadacc()" class="ui-btn ui-corner-all ui-shadow">Account</a>
+    </center>
+	</div><!-- /content -->
+
+  <div data-role="footer"  data-position="fixed" style="overflow:hidden;height:2rem">
+		    <h4 style="text-align:center;margin-top:-1.5rem">Tribook 2021</h4>
+	</div>
+
+</div><!-- /page -->
+
+<!-- Start of main page -->
+<div data-role="page" id="adddriver">
+
+	<div data-role="header" data-position="fixed" style="overflow:hidden;">
+		<h1>Add Driver</h1>
+	    <a href="#" data-icon="back" class="ui-btn-left" style="top:10px">Back</a>
+        <a href="#logoutconfirm" data-position-to="window" data-transition="pop" data-icon="power" class="ui-btn-right " style="top:10px">Logout</a>
+  
+	</div>
+
+	<div role="main" class="ui-content content">
+      <h1 class="text-center">Add new Driver</h1>
+      <form id="frmadddriver">
+        <center>
+          <input type="text" name="username" class="input"  placeholder="Username" value="">
+          <input type="password" name="password" class="input" placeholder="Password" value="">
+          <input type="password" name="password_confirmation" class="input" id="password_confirmation" placeholder="Confirm Password..." value="">
+          <hr>
+          <input type="text" name="name" class="input" id="name" placeholder="Full Name" value="">
+          <input type="text" name="license" class="input" id="license" placeholder="License" value="">
+          <input type="text" name="plate_no" class="input" id="plate_no" placeholder="Plate Number" value="">
+          <input type="text" name="cpnum" class="input" id="cpnum" placeholder="Mobile Number" value="">
+
+
+          <div class="action">
+             <button type="submit">Add</button>
+          </div>
+        </center>
+      </form>
+	</div><!-- /content -->
+
+  <div data-role="footer"  data-position="fixed" style="overflow:hidden;height:2rem">
+		    <h4 style="text-align:center;margin-top:-1.5rem">Tribook 2021</h4>
+	</div>
+
+</div><!-- /page -->
+
+<!-- Start of main page -->
+<div data-role="page" id="history">
+
+	<div data-role="header" data-position="fixed" style="overflow:hidden;">
+		<h1>History</h1>
+	    <a href="#" data-icon="back" class="ui-btn-left" style="top:10px">Back</a>
+        <a href="#logoutconfirm" data-position-to="window" data-transition="pop" data-icon="power" class="ui-btn-right " style="top:10px">Logout</a>
+	</div>
+
+	<div role="main" class="content">
+    <center>
+      <table data-role="table" class="ui-responsive table-stripe">
+             <thead>
+               <tr>
+                 <th>Transaction ID</th>
+                 <th>Pickup Point</th>
+                 <th>Destination Point</th>
+                 <th>Date</th>
+                 <th>Time</th>
+                 <th data-priority="4">Status</th>
+               </tr>
+             </thead>
+             <tbody id="tablereservation">
+             </tbody>
+           </table>
+    </center>
+	</div><!-- /content -->
+
+  <div data-role="footer"  data-position="fixed" style="overflow:hidden;height:2rem">
+		    <h4 style="text-align:center;margin-top:-1.5rem">Tribook 2021</h4>
+	</div>
+
+</div><!-- /page -->
+
+
+<!-- Start of main page -->
+<div data-role="page" id="drivers">
+
+	<div data-role="header" data-position="fixed" style="overflow:hidden;">
+		<h1>Drivers</h1>
+	    <a href="#" data-icon="back" class="ui-btn-left" style="top:10px">Back</a>
+        <a href="#logoutconfirm" data-position-to="window" data-transition="pop" data-icon="power" class="ui-btn-right " style="top:10px">Logout</a>
+	</div>
+
+	<div role="main" class="content">
+    <center>
+      <table data-role="table" class="ui-responsive table-stripe">
+             <thead>
+               <tr>
+                 <th>Name</th>
+                 <th>License</th>
+                 <th>Plate_no</th>
+                 <th>Contact Number</th>
+                 <th>Status</th>
+               </tr>
+             </thead>
+             <tbody id="tabledriver">
+             </tbody>
+           </table>
+    </center>
+	</div><!-- /content -->
+
+  <div data-role="footer"  data-position="fixed" style="overflow:hidden;height:2rem">
+		    <h4 style="text-align:center;margin-top:-1.5rem">Tribook 2021</h4>
+	</div>
+
+</div><!-- /page -->
+
+
+
+<!-- Start of main page -->
+<div data-role="page" id="reservations">
+
+	<div data-role="header" data-position="fixed" style="overflow:hidden;">
+		<h1>Reservations</h1>
+	    <a href="#" data-icon="back" class="ui-btn-left" style="top:10px">Back</a>
+        <a href="#logoutconfirm" data-position-to="window" data-transition="pop" data-icon="power" class="ui-btn-right " style="top:10px">Logout</a>
+	</div>
+
+	<div role="main" class="content">
+    <center>
+      <table data-role="table" class="ui-responsive table-stripe">
+             <thead>
+               <tr>
+                 <th>transaction ID</th>
+                 <th>Driver</th>
+                 <th>Pickup Loc</th>
+                 <th>Destination</th>
+                 <th>Status</th>
+               </tr>
+             </thead>
+             <tbody id="tablescheduled">
+             </tbody>
+           </table>
+    </center>
+	</div><!-- /content -->
+
+  <!-- <a href="#popupLogin" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-check ui-btn-icon-left ui-btn-a" data-transition="pop">Sign in</a> -->
+
+
+  <div data-role="footer"  data-position="fixed" style="overflow:hidden;height:2rem">
+		    <h4 style="text-align:center;margin-top:-1.5rem">Tribook 2021</h4>
+	</div>
+
+</div><!-- /page -->
+
+
+<!-- Start of main page -->
+<div data-role="page" id="assign">
+
+	<div data-role="header" data-position="fixed" style="overflow:hidden;">
+		<h1>Reservations</h1>
+	    <a href="#" data-icon="back" class="ui-btn-left" style="top:10px">Back</a>
+        <a href="#logoutconfirm" data-position-to="window" data-transition="pop" data-icon="power" class="ui-btn-right " style="top:10px">Logout</a>
+	</div>
+
+
+	<div role="main" class="content">
+    <center>
+      <form id="frmsetdriver" onsubmit="return false">
+         <div class="ui-field-contain">
+          <select name="setdriver" id="driverslist" data-native-menu="false" multiple="multiple" data-iconpos="left">
+              <option>Choose options</option>
+          </select>
+          <button onclick="ass()">Add Driver</button>
+        </div>
+      </form>
+    </center>
+	</div><!-- /content -->
+
+  <!-- <a href="#popupLogin" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-check ui-btn-icon-left ui-btn-a" data-transition="pop">Sign in</a> -->
+
+
+  <div data-role="footer"  data-position="fixed" style="overflow:hidden;height:2rem">
+		    <h4 style="text-align:center;margin-top:-1.5rem">Tribook 2021</h4>
+	</div>
+</div>
+
+<!-- Start of main page -->
+<div data-role="page" id="account">
+
+	<div data-role="header" data-position="fixed" style="overflow:hidden;">
+		<h1>Drivers</h1>
+	    <a href="#" data-icon="back" class="ui-btn-left" style="top:10px">Back</a>
+        <a href="#logoutconfirm" data-position-to="window" data-transition="pop" data-icon="power" class="ui-btn-right " style="top:10px">Logout</a>
+	</div>
+
+	
+	<div role="main" class="ui-content content">
+    <h1 class="text-center">Update Account</h1>
+    <form id="frmupdateacc">
+      <center>
+        <input type="text" name="username" class="input" id="accusername" placeholder="Username" value="">
+        <input type="text" name="cpnum" class="input" id="accmobile" placeholder="Mobile Number" value="">
+        <input type="password" name="password" class="input" id="accpassword" placeholder="Password" value="">
+        <hr>
+        <input type="text" name="name" class="input" id="accname" placeholder="Complete Name" value="">
+        <input type="text" name="license" class="input" id="acclicense" placeholder="License" value="">
+        <input type="text" name="plate_no" class="input" id="accplate_no" placeholder="Plate Number" value="">
+
+        
+              <fieldset data-role="controlgroup" data-type="horizontal">
+                  <input type="radio" name="status" id="radio-choice-h-2a" onchange="setstatus('activated')" value="activated">
+                  <label for="radio-choice-h-2a">Activated</label>
+                  <input type="radio" name="status" id="radio-choice-h-2b" onchange="setstatus('deactivated')" value="deactivated">
+                  <label for="radio-choice-h-2b">Deactivated</label>
+              </fieldset>
+        <div class="action">
+           <button type="submit">Update Account</button>
+        </div>
+      </center>
+    </form>
+</div><!-- /content -->
+
+  <div data-role="footer"  data-position="fixed" style="overflow:hidden;height:2rem">
+		    <h4 style="text-align:center;margin-top:-1.5rem">Tribook 2021</h4>
+	</div>
+
+</div><!-- /page -->
+
+
+
+
+
+<script>
+    $('a[data-icon="back"]').click((e)=>{
+        e.preventDefault();
+        window.history.back();
+        })
+    
+    
+        driverlist();
+  toastr.options = {
+    "closeButton": false,
+    "debug": false,
+    "newestOnTop": true,
+    "progressBar": false,
+    "positionClass": "toast-top-full-width",
+    "preventDuplicates": false,
+    "showDuration": "3000",
+    "hideDuration": "1000",
+    "timeOut": "3000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+  }
+
+    function checksession(){
+    token=storage.getItem("token")
+    $.ajax({
+        url: host+"/api/checksession",
+        type:'get',
+        headers:{
+        Accept:'application/json',
+        Authorization:'Bearer ' + token
+        },
+        success: function(result){
+        window.location.href="#home"
+        },
+        error: function(result){
+        window.location.href='index.html'
+        },
+    });
+    }
+    checksession();
+
+    
+    function ajaxreq(args){
+        let ar={...args,
+          headers:{
+            Accept:'application/json',
+            Authorization:'Bearer ' + token
+          },
+        };
+        ar.type=args.type || 'get';
+        ar.url=host+args.url;
+        $.ajax(ar);
+      };
+    
+      function showinputerrors(res){
+        if(res.status==422){
+          res.responseJSON.errors  &&
+          Object.entries(res.responseJSON.errors).map(([name,val])=>{
+            toastr.error(val)
+            console.log('[name='+name+']')
+            //$('[name='+name+']').css({'color':'red'})
+          })
+        }
+      }
+
+    
+    $('#logout').click((e)=>{
+        e.preventDefault();
+        storage.removeItem("token") // Pass a key name to remove that key from storage.
+        storage.removeItem("userid") // Pass a key name to remove that key from storage.
+        storage.removeItem("acctype") // Pass a key name to remove that key from storage.
+        checksession();
+        toastr.success("logout successful")
+      })
+    
+    $('#frmadddriver').submit((e)=>{
+        e.preventDefault()
+        ajaxreq({
+          data:$('#frmadddriver').serializeArray(),
+          url:'/api/adddriver',
+          type:'post',
+          success:(res)=>{
+            console.log(res)
+            if(res.status=='success'){
+              window.location.href="#home"
+              toastr.success("Driver was added")
+            }
+          },
+          error:showinputerrors
+          
+        })
+      })
+        
+    $('#booking').submit((e)=>{
+        let did=$('#title-filter-menu>option').filter((i,option)=>option.innerHTML==$('.filterable-select')[0].innerHTML)
+        let val=did.val()
+        let fd=$('#booking').serializeArray();
+        fd.push({name:'driver_id',value:val})
+        e.preventDefault();
+        ajaxreq({
+          data:fd,
+          url:'/api/book',
+          type:'post',
+          success:(res)=>{
+            if(res.status=='success'){
+              window.location.href="#home"
+              toastr.success("Booking Successful")
+            }
+          },
+          error:showinputerrors
+          
+        })
+      })
+    
+     let a;
+       $('#frmupdateacc').submit((e)=>{
+        e.preventDefault();
+        ajaxreq({
+          data:$("#frmupdateacc").serialize(),
+          url:'/api/updateacc',
+          type:'post',
+          success:(res)=>{
+            console.log(res)
+            if(res.status=='success'){
+              window.location.href="#home"
+              toastr.success("Account Updated")
+            }
+          },
+          error:showinputerrors
+          
+        })
+      })
+      function scheduledlist(){
+        ajaxreq({
+          url: "/api/scheduled",
+          type:'get',
+          success: function(result){
+            if(result.scheduled)
+            {
+            console.log('sched',result)
+              $('#tablescheduled').html('');
+              result.scheduled.map((schedule)=>{
+                let s=!schedule.driver?`<a onclick="console.log(${schedule.id})"  href="#assign" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-check ui-btn-icon-left ui-btn-a" >Assign</a>`:schedule.driver;
+               $('#tablescheduled').append(`
+                 <tr>
+                     <td>${schedule.id}</td>
+                     <td>${s}</td>
+                     <td>${schedule.pickup}</td>
+                     <td>${schedule.destination}</td>
+                     <td>${schedule.status}</td>
+                 </tr>
+               `)
+              })
+            }
+          },
+          error:(res)=>{
+            toastr.error('error fetching reservations list')
+          }
+        })
+      }
+       $('#frmupdateacc').submit((e)=>{
+        e.preventDefault();
+        ajaxreq({
+          data:$("#frmupdateacc").serialize(),
+          url:'/api/updateacc',
+          type:'post',
+          success:(res)=>{
+            console.log(res)
+            if(res.status=='success'){
+              window.location.href="#home"
+              toastr.success("Account Updated")
+            }
+          },
+          error:showinputerrors
+          
+        })
+      })
+    function assign(id){
+      a=id;
+    }
+     function ass(){
+        let d =new FormData();
+        d.append('setdriver',$(':input[name="setdriver"]').val())
+        console.log(d)
+       ajaxreq({
+         data:{setdriver:$(':input[name="setdriver"]').val()},
+         url:`/api/${a}/setdriver`,
+         type:'post',
+         success:(res)=>{
+           if(res.status=='success'){
+             toastr.success('Driver set for transaction')
+             window.location.href="#reservations"
+           }
+         },
+         error:showinputerrors
+         
+       })
+     }
+      function scheduledlist(){
+        ajaxreq({
+          url: "/api/scheduled",
+          type:'get',
+          success: function(result){
+            if(result.scheduled)
+            {
+            console.log('sched',result)
+              $('#tablescheduled').html('');
+              result.scheduled.map((schedule)=>{
+                let s;
+                if(schedule.drivers.length>0)
+                  s=schedule.drivers.map((driver)=>driver.name)
+                else
+                  s=`<a onclick="assign(${schedule.id})"  href="#assign" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-check ui-btn-icon-left ui-btn-a" >Assign</a>`;
+                  console.log(s)
+                
+               $('#tablescheduled').append(`
+                 <tr>
+                     <td>${schedule.id}</td>
+                     <td>${s}</td>
+                     <td>${schedule.pickup}</td>
+                     <td>${schedule.destination}</td>
+                     <td>${schedule.status}</td>
+                 </tr>
+               `)
+              })
+            }
+          },
+          error:(res)=>{
+            toastr.error('error fetching reservations list')
+          }
+        })
+      }
+      function driverlist(){
+        ajaxreq({
+         url: "/api/drivers",
+         type:'get',
+         success: function(result){
+           if(result.drivers)
+           {
+             $('#driverslist').html('<option>Select Driver...</option>');
+             $('#tabledriver').html('');
+             result.drivers.map((driver)=>{
+               if(driver.status=='activated')
+                $('#driverslist').append('<option value="' + driver.id + '">' + driver.name + '</option>')
+               let s;
+               if(driver.status=='deactivated') s=`<button onclick="activate(${driver.id})">Activate</button>`;
+               if(driver.status=='activated') s=`<button onclick="deactivate(${driver.id})">Deactivate</button>`;
+              $('#tabledriver').append(`
+                <tr>
+                    <td>${driver.name}</td>
+                    <td>${driver.license}</td>
+                    <td>${driver.plate_no}</td>
+                    <td>${driver.cpnum}</td>
+                    <td>${driver.status}</td>
+                    <td>${s}</td>
+                </tr>
+              `)
+             })
+           }
+         },
+         error:(res)=>{
+           toastr.error('error fetching drivers list')
+         }
+       })
+     }
+     function reservations(){
+        ajaxreq({
+         url: "/api/reservations",
+         type:'get',
+         success: function(result){
+           console.log(result)
+           if(result.booking){
+             $('#tablereservation').html('')
+             result.booking.map((book)=>{
+               let date=new Date(book.book_date)
+               date=`${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`
+               let s="";
+               if(book.status=='for pickup' || book.status=='scheduled')
+                s=`<button onclick="cancel(${book.id})">Cancel</button>`
+             $('#tablereservation').append(`
+               <tr>
+                   <td>${book.id}</td>
+                   <td>${book.pickup}</td>
+                   <td>${book.destination}</td>
+                   <td>${date.toString()}</td>
+                   <td>${book.book_time}</td>
+                   <td>${book.status}</td>
+               </tr>
+             `)
+             })
+           }
+         },
+         error:(res)=>{
+           toastr.error('error fetching drivers list')
+         }
+       })
+     }
+     /*function cancel(id)
+     {
+      ajaxreq({
+        url:'/api/book/'+id,
+        type:'get',
+        success:(res)=>{
+          if(res.status=='success'){
+            window.location.href="#home"
+            toastr.success("Booking was canceled")
+          }
+        },
+        error:showinputerrors
+        
+      })
+     }*/
+     $('#acc').click((e)=>{
+      ajaxreq({
+        url:'/api/me',
+        type:'get',
+        success:(res)=>{
+          console.log(res)
+          if(res.status=='success'){
+            $('#accusername').val(res.user.username||'')
+            $('#accmobile').val(res.user.cpnum||'')
+            if(res.profile){
+              $('#accname').val(res.profile.name||'')
+              $('#accaddress').val(res.profile.address||'')
+            }
+          }
+        },
+        error:showinputerrors
+        
+      })
+     })
+     function activate(id){
+      ajaxreq({
+        url:'/api/activatedriver/'+id,
+        type:'post',
+        success:(res)=>{
+          if(res.status=='success'){
+            driverlist();
+            toastr.success("Driver was Activated")
+          }
+        },
+        error:showinputerrors
+        
+      })
+     }
+     
+     function deactivate(id){
+      ajaxreq({
+        url:'/api/deactivatedriver/'+id,
+        type:'post',
+        success:(res)=>{
+          if(res.status=='success'){
+            driverlist();
+            toastr.success("Driver was Deactivated")
+          }
+        },
+        error:showinputerrors
+        
+      })
+     }
+     
+     function loadacc(){
+      ajaxreq({
+        url:'/api/me',
+        type:'get',
+        success:(res)=>{
+          console.log(res)
+          if(res.status=='success'){
+            $('#accusername').val(res.user.username||'')
+            $('#accmobile').val(res.user.cpnum||'')
+            if(res.profile){
+              $('#accname').val(res.profile.name||'')
+              $('#acclicense').val(res.profile.license||'')
+              $('#accplate_no').val(res.profile.plate_no||'')
+              if(res.profile.status=='activated')
+                $(':input[name="status"]')[0].checked;
+              else
+                $(':input[name="status"]')[1].checked;
+            }
+          }
+        },
+        error:showinputerrors
+        
+      })
+     }
+     function setstatus(val){
+       console.log(val)
+      ajaxreq({
+        url:'/api/setstatus/',
+        type:'post',
+        data:{status:val},
+        success:(res)=>{
+          if(res.status=='success'){
+            loadacc();
+            toastr.success("Account Updated")
+          }
+        },
+        error:showinputerrors
+        
+      })
+     }
+</script>
+
+</body>
+</html>

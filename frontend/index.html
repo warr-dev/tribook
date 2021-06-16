@@ -1,0 +1,774 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src *"> -->
+  <!-- script-src 'unsafe-inline'; connect-src * -->
+	<title>jQuery Mobile: Theme Download</title>
+	<link rel="stylesheet" href="themes/lightgreen.min.css" />
+	<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" href="css/jquery.mobile.structure-1.4.5.min.css" />
+	<script src="jquery-1.11.1.min.js"></script>
+	<script src="jquery.mobile-1.4.5.min.js"></script>
+  <link href="css/select2.min.css" rel="stylesheet" />
+		<script src="js/select2.min.js"></script>
+  <link rel="stylesheet" href="css/toastr.min.css">
+  <script src="js/toastr.min.js"></script>
+  <script>
+    var storage = window.localStorage;
+    let token=storage.getItem("token")
+    let host=storage.getItem("host") || "http://localhost:8000"
+    //host="192.168.43.97:8000"
+  </script>
+  <style>
+      .title{
+          font-weight: bolder;
+          font-size: 2rem !important;
+          text-transform: uppercase;
+          margin-bottom:-3rem;
+          margin-top:100px;
+      }
+      .btn{
+          width: 50vw !important;
+      }
+      .action{
+          margin-top: 3rem;
+      }
+      .center{
+          margin-top: 40vh;
+      }
+      .bg-green{
+          background-color: #31A49E;
+      }
+      .text-white{
+          color: white;
+      }
+      .loading{
+          width: 50vw;
+          animation: run 3s ease-in forwards;
+          
+      }
+      .blink{
+        animation: blink 2s ease-in both;
+          animation-iteration-count: infinite;
+      }
+      .title{
+        text-transform: uppercase;
+        font-weight: bolder;
+      }
+      .text-center{
+          text-align: center;
+      }
+      @keyframes run{
+        0%{
+          transform: translateX(-20%);
+        }
+        100%{
+        transform: translateX(110%);
+        }
+      }
+      @keyframes blink{
+        0%{
+          color: #4ec180;
+        }
+        50%{
+          color: #801c1c;
+        }
+        100%{
+          color: #4e801c;
+        }
+      }
+      .ui-selectmenu.ui-popup .ui-input-search {
+        margin-left: .5em;
+        margin-right: .5em;
+        }
+        .ui-selectmenu.ui-dialog .ui-content {
+        padding-top: 0;
+        }
+        .ui-selectmenu.ui-dialog .ui-selectmenu-list {
+        margin-top: 0;
+        }
+        .ui-selectmenu.ui-popup .ui-selectmenu-list li.ui-first-child .ui-btn {
+        border-top-width: 1px;
+        -webkit-border-radius: 0;
+        border-radius: 0;
+        }
+        .ui-selectmenu.ui-dialog .ui-header {
+        border-bottom-width: 1px;
+        }
+        hr{
+          margin: 2rem 1rem;
+        }
+  </style>
+</head>
+<body>
+
+    
+<!-- Start of second page -->
+<div data-role="page" id="loading" class="bg-green">
+
+	<div role="main" class="ui-content content">
+    <div class="center">
+    </div>
+        <div class="text-white loading">
+            <center>
+                <h1 class="title">TRibOOk</h1>
+                <img src="img/logo.gif" class="logo" alt="logo">
+            </center>
+        </div>
+        <center class="text-white blink">
+            <h1>Software is loading...</h1>
+        </center>
+	</div><!-- /content -->
+</div><!-- /page -->
+
+
+<div data-role="page" id="menu">
+    <div data-role="header" data-position="fixed" style="overflow:hidden;">
+          <h1 class="title">TriBook</h1>
+      </div>
+      <div role="main" class="ui-content content">
+      <center>
+          <h1 class="title">Tribook</h1>
+          <img src="img/logo.gif" class="logo" alt="logo">
+          <h3>Welcome Guest!</h3>
+          <div class="action">
+              <a href="#login" data-transition="flow" class="ui-btn ui-btn-inline btn">Login</a>
+              <a href="#register" data-transition="flow" class="ui-btn ui-btn-inline btn">Register</a>
+              <a href="#about" data-transition="flow" class="ui-btn ui-btn-inline btn">About</a>
+              <a href="#settings" data-transition="flow" class="ui-btn ui-btn-inline btn">Settings</a>
+              <a href="#" data-transition="flow" class="ui-btn ui-btn-inline btn">Exit</a>
+          </div>
+      </center>
+      </div><!-- /content -->
+      
+    <div data-role="footer"  data-position="fixed" style="overflow:hidden;height:2rem">
+        <h4 style="text-align:center;margin-top:-1.5rem">Tribook 2021</h4>
+    </div>
+  </div><!-- /page -->
+
+
+		<!-- Start of first page -->
+<div data-role="page" id="login">
+  <div data-role="header" data-position="fixed" style="overflow:hidden;">
+		<h1></h1>
+            <a href="#" data-icon="back" class="ui-btn-left" style="top:10px">Back</a>
+	</div>
+	<div role="main" class="ui-content content">
+    <center>
+      <form id="frmlogin">
+        <img src="img/logo.gif" class="logo" alt="logo">
+
+        <h1>Login</h1>
+        <br>
+
+        <input type="text" name="username" class="input" id="username" placeholder="Username..." value="">
+        <input type="password" name="password" id="password" placeholder="Password..." value="">
+
+        <div class="action">
+           <button type="submit">Login</button>
+        </div>
+      </form>
+    </center>
+	</div><!-- /content -->
+
+</div><!-- /page -->
+
+
+<!-- Start of second page -->
+<div data-role="page" id="register">
+
+	<div data-role="header" data-position="fixed" style="overflow:hidden;">
+		<h1></h1>
+            <a href="#" data-icon="back" class="ui-btn-left" style="top:10px">Back</a>
+	</div>
+
+	<div role="main" class="ui-content content">
+    <center>
+      <form id="frmRegister">
+        <img src="img/logo.gif" class="logo" alt="logo">
+
+        <h1>Registration</h1>
+        <br>
+
+
+        <input type="text" name="cpnum" class="input" id="cpnum" placeholder="Celphone Number..." value="">
+        <input type="text" name="username" class="input" id="username" placeholder="Username..." value="">
+        <input type="password" name="password" id="password" placeholder="Password..." value="">
+        <input type="password" name="password_confirmation" class="input" id="password_confirmation" placeholder="Confirm Password..." value="">
+        <hr class="p-4">
+        
+        <input type="text" name="name" class="input" placeholder="Full Name" value="">
+        <input type="text" name="address" class="input"  placeholder="Complete Address" value="">
+
+        <div class="action">
+           <button type="submit">Register</button>
+        </div>
+      </form>
+
+    </center>
+	</div><!-- /content -->
+
+</div><!-- /page -->
+
+
+
+<!-- Start of second page -->
+<div data-role="page" id="about">
+
+	<div data-role="header" data-position="fixed" style="overflow:hidden;">
+		<h1></h1>
+            <a href="#" data-icon="back" class="ui-btn-left" style="top:10px">Back</a>
+	</div>
+
+	<div role="main" class="ui-content content">
+    <center>
+        <h1>About this software</h1>
+        <br>
+
+
+    </center>
+	</div><!-- /content -->
+
+</div><!-- /page -->
+
+
+<!-- Start of second page -->
+<div data-role="page" id="settings">
+
+	<div data-role="header" data-position="fixed" style="overflow:hidden;">
+		<h1></h1>
+            <a href="#" data-icon="back" class="ui-btn-left" style="top:10px">Back</a>
+	</div>
+
+	<div role="main" class="ui-content content">
+    <center>
+        <img src="img/logo.gif" class="logo" alt="logo">
+
+        <h1>Settings</h1>
+        <br>
+
+
+        <input type="text" name="ip" class="input" id="ip" placeholder="Server" value="">
+
+        <div class="action">
+           <button onclick="setip()">Set</button>
+        </div>
+
+
+
+    </center>
+	</div><!-- /content -->
+  <script>
+    function setip(){
+      host=document.querySelector('#ip').value
+      storage.setItem("host", host )
+      window.location.href="#menu"
+    }
+  </script>
+</div><!-- /page -->
+
+
+
+<div id="logoutconfirm" data-role="page" data-overlay-theme="a" data-theme="a" data-dismissible="false" class="center">
+    <div data-role="header" data-theme="a">
+    <h1>Confirm Logout?</h1>
+    </div>
+    <div role="main" class="ui-content">
+        <h3 class="ui-title">Are you sure you want to logout your account?</h3>
+    <center>
+        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-rel="back" style="top:30px">Cancel</a>
+        <a href="#" id="logout" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-rel="back" data-transition="flow" style="top:30px">Confirm</a>
+    </center>
+    </div>
+</div>
+<!-- Start of main page -->
+<div data-role="page" id="home">
+
+	<div data-role="header" data-position="fixed" style="overflow:hidden;">
+		<h1>Home</h1>
+	    <a href="#" data-icon="back" class="ui-btn-left" style="top:10px">Back</a>
+        <a href="#logoutconfirm" data-transition="pop" data-icon="power" class="ui-btn-right " style="top:10px">Logout</a>
+	</div>
+
+	<div role="main" class="ui-content content">
+    <center>
+      <a href="#pickup" class="ui-btn ui-corner-all ui-shadow">Pickup</a>
+      <a href="#book" class="ui-btn ui-corner-all ui-shadow">Book</a>
+      <a href="#history" onclick="reservations()" class="ui-btn ui-corner-all ui-shadow">History</a>
+      <!-- <a href="#drivers" class="ui-btn ui-corner-all ui-shadow">Drivers</a> -->
+      <a href="#account" onclick="loadacc()" class="ui-btn ui-corner-all ui-shadow">Account</a>
+    </center>
+	</div><!-- /content -->
+
+  <div data-role="footer"  data-position="fixed" style="overflow:hidden;height:2rem">
+		    <h4 style="text-align:center;margin-top:-1.5rem">Tribook 2021</h4>
+	</div>
+
+</div><!-- /page -->
+
+
+<!-- Start of main page -->
+<div data-role="page" id="book">
+
+	<div data-role="header" data-position="fixed" style="overflow:hidden;">
+		<h1>Booking</h1>
+	    <a href="#" data-icon="back" class="ui-btn-left" style="top:10px">Back</a>
+        <a href="#logoutconfirm"  data-position-to="window" data-transition="pop" data-icon="power" class="ui-btn-right " style="top:10px">Logout</a>
+  
+	</div>
+
+	<div role="main" class="ui-content content">
+      <h1 class="text-center">Book A Ride</h1>
+      <form id="booking">
+        <center>
+          <div id="drivers" style="display: none;">
+                    <select id="title-filter-menu" data-native-menu="false" class="filterable-select">
+                      </select>
+          <br><hr>
+          </div>
+
+          <input type="text" name="pickup" class="input"  placeholder="Pickup Location" value="">
+          <input type="text" name="destination" class="input" placeholder="Destination" value="">
+          <input type="number" name="passengers" class="input" placeholder="Passenger Count" value="">
+          <input type="date" name="book_date" placeholder="Date" value="">
+          <input type="time" name="book_time" class="input" placeholder="Time" value="">
+
+          <div class="action">
+             <button type="submit">Book</button>
+          </div>
+        </center>
+      </form>
+	</div><!-- /content -->
+
+  <div data-role="footer"  data-position="fixed" style="overflow:hidden;height:2rem">
+		    <h4 style="text-align:center;margin-top:-1.5rem">Tribook 2021</h4>
+	</div>
+
+</div><!-- /page -->
+
+<!-- Start of main page -->
+<div data-role="page" id="pickup">
+
+	<div data-role="header" data-position="fixed" style="overflow:hidden;">
+		<h1>Pickup</h1>
+	    <a href="#" data-icon="back" class="ui-btn-left" style="top:10px">Back</a>
+        <a href="#logoutconfirm" data-position-to="window" data-transition="pop" data-icon="power" class="ui-btn-right " style="top:10px">Logout</a>
+  
+	</div>
+
+	<div role="main" class="ui-content content">
+      <h1 class="text-center">Pick Up Service</h1>
+      <form id="formpickup">
+        <center>
+          <input type="text" name="pickup" class="input" placeholder="Pickup Location" value="">
+          <input type="text" name="destination" class="input" placeholder="Destination" value="">
+          <input type="number" name="passengers" class="input" placeholder="Passenger Count" value="">
+          <input type="hidden" name="type" class="input" value="pickup">
+
+          <div class="action">
+             <button type="submit">Apply</button>
+          </div>
+        </center>
+      </form>
+	</div><!-- /content -->
+
+  <div data-role="footer"  data-position="fixed" style="overflow:hidden;height:2rem">
+		    <h4 style="text-align:center;margin-top:-1.5rem">Tribook 2021</h4>
+	</div>
+
+</div><!-- /page -->
+
+<!-- Start of main page -->
+<div data-role="page" id="history">
+
+	<div data-role="header" data-position="fixed" style="overflow:hidden;">
+		<h1>History</h1>
+	    <a href="#" data-icon="back" class="ui-btn-left" style="top:10px">Back</a>
+        <a href="#logoutconfirm" data-position-to="window" data-transition="pop" data-icon="power" class="ui-btn-right " style="top:10px">Logout</a>
+	</div>
+
+	<div role="main" class="content">
+    <center>
+      <table data-role="table" class="ui-responsive table-stripe">
+             <thead>
+               <tr>
+                 <th>Transaction ID</th>
+                 <th>Pickup Point</th>
+                 <th>Destination Point</th>
+                 <th>Passenger Count</th> 
+        
+                 <th>Date</th>
+                 <th>Time</th>
+                 <th data-priority="4">Status</th>
+               </tr>
+             </thead>
+             <tbody id="tablereservation">
+             </tbody>
+           </table>
+    </center>
+	</div><!-- /content -->
+
+  <div data-role="footer"  data-position="fixed" style="overflow:hidden;height:2rem">
+		    <h4 style="text-align:center;margin-top:-1.5rem">Tribook 2021</h4>
+	</div>
+
+</div><!-- /page -->
+
+
+<!-- Start of main page -->
+<div data-role="page" id="drivers">
+
+	<div data-role="header" data-position="fixed" style="overflow:hidden;">
+		<h1>Drivers</h1>
+	    <a href="#" data-icon="back" class="ui-btn-left" style="top:10px">Back</a>
+        <a href="#logoutconfirm" data-position-to="window" data-transition="pop" data-icon="power" class="ui-btn-right " style="top:10px">Logout</a>
+	</div>
+
+	<div role="main" class="content">
+    <center>
+      <table data-role="table" class="ui-responsive table-stripe">
+             <thead>
+               <tr>
+                 <th>Name</th>
+                 <th>License</th>
+                 <th>Plate_no</th>
+                 <th>Contact Number</th>
+               </tr>
+             </thead>
+             <tbody id="tabledriver">
+             </tbody>
+           </table>
+    </center>
+	</div><!-- /content -->
+
+  <div data-role="footer"  data-position="fixed" style="overflow:hidden;height:2rem">
+		    <h4 style="text-align:center;margin-top:-1.5rem">Tribook 2021</h4>
+	</div>
+
+</div><!-- /page -->
+
+
+<!-- Start of main page -->
+<div data-role="page" id="account">
+
+	<div data-role="header" data-position="fixed" style="overflow:hidden;">
+		<h1>Drivers</h1>
+	    <a href="#" data-icon="back" class="ui-btn-left" style="top:10px">Back</a>
+        <a href="#logoutconfirm" data-position-to="window" data-transition="pop" data-icon="power" class="ui-btn-right " style="top:10px">Logout</a>
+	</div>
+
+	
+	<div role="main" class="ui-content content">
+    <h1 class="text-center">Update Account</h1>
+    <form id="frmupdateacc">
+      <center>
+        <input type="text" name="username" class="input" id="accusername" placeholder="Username" value="">
+        <input type="text" name="cpnum" class="input" id="accmobile" placeholder="Mobile Number" value="">
+        <input type="password" name="password" class="input" id="accpassword" placeholder="Password" value="">
+        <hr>
+        <input type="text" name="name" class="input" id="accname" placeholder="Complete Name" value="">
+        <input type="text" name="address" class="input" id="accaddress" placeholder="Complete Address" value="">
+
+        <div class="action">
+           <button type="submit">Update Account</button>
+        </div>
+      </center>
+    </form>
+</div><!-- /content -->
+
+  <div data-role="footer"  data-position="fixed" style="overflow:hidden;height:2rem">
+		    <h4 style="text-align:center;margin-top:-1.5rem">Tribook 2021</h4>
+	</div>
+
+</div><!-- /page -->
+
+
+
+
+
+<script>
+    $('a[data-icon="back"]').click((e)=>{
+        e.preventDefault();
+        window.history.back();
+        })
+    
+    
+  toastr.options = {
+    "closeButton": false,
+    "debug": false,
+    "newestOnTop": true,
+    "progressBar": false,
+    "positionClass": "toast-top-full-width",
+    "preventDuplicates": false,
+    "showDuration": "3000",
+    "hideDuration": "1000",
+    "timeOut": "3000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+  }
+
+    function checksession(){
+    token=storage.getItem("token")
+    $.ajax({
+        url: host+"/api/checksession",
+        type:'get',
+        headers:{
+        Accept:'application/json',
+        Authorization:'Bearer ' + token
+        },
+        success: function(result){
+          if(storage.getItem("acctype")=='admin') window.location.href="admin.html"
+          if(storage.getItem("acctype")=='driver') window.location.href="driver.html"
+          window.location.href="#home"
+        },
+        error: function(result){
+        window.location.href="#menu"
+        },
+    });
+    }
+    checksession();
+
+    
+    function ajaxreq(args){
+        let ar={...args,
+          headers:{
+            Accept:'application/json',
+            Authorization:'Bearer ' + token
+          },
+        };
+        ar.type=args.type || 'get';
+        ar.url=host+args.url;
+        $.ajax(ar);
+      };
+    
+      function showinputerrors(res){
+        if(res.status==422){
+          res.responseJSON.errors  &&
+          Object.entries(res.responseJSON.errors).map(([name,val])=>{
+            toastr.error(val)
+            console.log('[name='+name+']')
+            //$('[name='+name+']').css({'color':'red'})
+          })
+        }
+      }
+
+    $('#frmlogin').submit((e)=>{
+        e.preventDefault();
+        $.ajax({
+          url: host+"/api/login",
+          type:"post",
+          headers:{
+            Accept:'application/json'
+          },
+          data:$("#frmlogin").serialize(),
+          success: function(result){
+              console.log(result)
+                storage.setItem("token", result.token)
+                storage.setItem("userid", result.user.id)
+                storage.setItem("acctype", result.user.acctype)
+                checksession();
+                toastr.success("Login successful")
+            },
+          error: showinputerrors
+      });
+      })
+
+    
+    $('#logout').click((e)=>{
+        e.preventDefault();
+        storage.removeItem("token") // Pass a key name to remove that key from storage.
+        storage.removeItem("userid") // Pass a key name to remove that key from storage.
+        storage.removeItem("acctype") // Pass a key name to remove that key from storage.
+        checksession();
+        toastr.success("logout successful")
+      })
+    
+      $('#frmRegister').submit((e)=>{
+        e.preventDefault();
+        $.ajax({
+          url: host+"/api/register",
+          type:"post",
+          headers:{
+            Accept:'application/json',
+            Authorization:'Bearer ' + token
+          },
+          data:$("#frmRegister").serialize(),
+          success: function(result){
+            window.location.href="#login"
+            toastr.success("Registration Successful")
+            checksession();
+            },
+          error:showinputerrors
+      });
+      })
+
+      $('#frmupdateacc').submit((e)=>{
+        e.preventDefault();
+        ajaxreq({
+          data:$("#frmupdateacc").serialize(),
+          url:'/api/updateacc',
+          type:'post',
+          success:(res)=>{
+            console.log(res)
+            if(res.status=='success'){
+              window.location.href="#home"
+              toastr.success("Account Updated")
+            }
+          },
+          error:showinputerrors
+          
+        })
+      })
+      
+      
+    $('#formpickup').submit((e)=>{
+        e.preventDefault()
+        let fd=$('#formpickup').serializeArray();
+        ajaxreq({
+          data:fd,
+          url:'/api/pickup',
+          type:'post',
+          success:(res)=>{
+            console.log(res)
+            if(res.status=='success'){
+              window.location.href="#home"
+              toastr.success("Application for Service Successful")
+            }
+          },
+          error:showinputerrors
+          
+        })
+      })
+        
+    $('#booking').submit((e)=>{
+        let did=$('#title-filter-menu>option').filter((i,option)=>option.innerHTML==$('.filterable-select')[0].innerHTML)
+        let val=did.val()
+        let fd=$('#booking').serializeArray();
+        fd.push({name:'driver_id',value:val})
+        e.preventDefault();
+        ajaxreq({
+          data:fd,
+          url:'/api/book',
+          type:'post',
+          success:(res)=>{
+            if(res.status=='success'){
+              window.location.href="#home"
+              toastr.success("Booking Successful")
+            }
+          },
+          error:showinputerrors
+          
+        })
+      })
+      
+    /*$('input[name="mode"]').change((e)=>{
+        if(e.currentTarget.value=='off')
+          $('#drivers').show();
+        else
+        $('#drivers').hide();
+      })*/
+      
+     
+      function driverlist(){
+        ajaxreq({
+         url: "/api/drivers",
+         type:'get',
+         success: function(result){
+           if(result.drivers)
+           {
+             $('#title-filter-menu').html('<option>Select Driver...</option>');
+             $('#tabledriver').html('');
+             result.drivers.map((driver)=>{
+               $('#title-filter-menu').append('<option value="' + driver.id + '">' + driver.name + '</option>')
+              $('#tabledriver').append(`
+                <tr>
+                    <td>${driver.name}</td>
+                    <td>${driver.license}</td>
+                    <td>${driver.plate_no}</td>
+                    <td>${driver.cpnum}</td>
+                </tr>
+              `)
+             })
+           }
+         },
+         error:(res)=>{
+           toastr.error('error fetching drivers list')
+         }
+       })
+     }
+     function reservations(){
+        ajaxreq({
+         url: "/api/reservations",
+         type:'get',
+         success: function(result){
+           console.log(result)
+           if(result.booking){
+             $('#tablereservation').html('')
+             result.booking.map((book)=>{
+               let date=new Date(book.book_date)
+               date=`${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`
+               let s="";
+               if(book.status=='for pickup' || book.status=='scheduled')
+                s=`<button onclick="cancel(${book.id})">Cancel</button>`
+             $('#tablereservation').append(`
+               <tr>
+                   <td>${book.id}</td>
+                   <td>${book.pickup}</td>
+                   <td>${book.destination}</td>
+                   <td>${book.passengers}</td>
+                   <td>${date.toString()}</td>
+                   <td>${book.book_time}</td>
+                   <td>${book.status}</td>
+                   <td>${s}</td>
+               </tr>
+             `)
+             })
+           }
+         },
+         error:(res)=>{
+           toastr.error('error fetching drivers list')
+         }
+       })
+     }
+     /*function cancel(id)
+     {
+      ajaxreq({
+        url:'/api/book/'+id,
+        type:'get',
+        success:(res)=>{
+          if(res.status=='success'){
+            window.location.href="#home"
+            toastr.success("Booking was canceled")
+          }
+        },
+        error:showinputerrors
+        
+      })
+     }*/
+     function loadacc(){
+      ajaxreq({
+        url:'/api/me',
+        type:'get',
+        success:(res)=>{
+          console.log(res)
+          if(res.status=='success'){
+            $('#accusername').val(res.user.username||'')
+            $('#accmobile').val(res.user.cpnum||'')
+            if(res.profile){
+              $('#accname').val(res.profile.name||'')
+              $('#accaddress').val(res.profile.address||'')
+            }
+          }
+        },
+        error:showinputerrors
+        
+      })
+     }
+</script>
+
+</body>
+</html>

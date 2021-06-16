@@ -1,0 +1,599 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src *"> -->
+  <!-- script-src 'unsafe-inline'; connect-src * -->
+	<title>jQuery Mobile: Theme Download</title>
+	<link rel="stylesheet" href="themes/tribook.min.css" />
+	<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" href="css/jquery.mobile.structure-1.4.5.min.css" />
+	<script src="jquery-1.11.1.min.js"></script>
+	<script src="jquery.mobile-1.4.5.min.js"></script>
+  <link href="css/select2.min.css" rel="stylesheet" />
+		<script src="js/select2.min.js"></script>
+  <link rel="stylesheet" href="css/toastr.min.css">
+  <script src="js/toastr.min.js"></script>
+  <script>
+    let host="http://localhost:81"
+    //host="192.168.43.97:8000"
+    var storage = window.localStorage;
+    let token=storage.getItem("token")
+  </script>
+	<style>
+    .title{
+      text-align: center;
+    }
+		body{
+			height: 100vh;
+		}
+		.content{
+			margin: 1rem;
+      margin-top: 5rem;
+		}
+    .logo{
+      width: 80vw;
+    }
+    .ui-selectmenu.ui-popup .ui-input-search {
+      margin-left: .5em;
+      margin-right: .5em;
+      }
+      .ui-selectmenu.ui-dialog .ui-content {
+      padding-top: 0;
+      }
+      .ui-selectmenu.ui-dialog .ui-selectmenu-list {
+      margin-top: 0;
+      }
+      .ui-selectmenu.ui-popup .ui-selectmenu-list li.ui-first-child .ui-btn {
+      border-top-width: 1px;
+      -webkit-border-radius: 0;
+      border-radius: 0;
+      }
+      .ui-selectmenu.ui-dialog .ui-header {
+      border-bottom-width: 1px;
+      }
+	</style>
+</head>
+<body class="">
+	<!-- <div data-role="header" data-position="fixed" style="overflow:hidden;">
+		<h1>I'm a header</h1>
+	    <a href="#" data-icon="gear" class="ui-btn-right">Options</a>
+	    <a href="#" data-icon="back" class="ui-btn-left">Back</a>
+	</div>
+	<div class="content"> -->
+
+		<!-- Start of first page -->
+<div data-role="page" id="login">
+  <div data-role="header" data-position="fixed" style="overflow:hidden;">
+		<h1></h1>
+	    <a href="#register" data-icon="gear" class="ui-btn-right" style="top:10px">Register</a>
+	</div>
+	<div role="main" class="ui-content content">
+    <center>
+      <form id="frmlogin">
+        <img src="img/logo.png" class="logo" alt="logo">
+
+        <h1>Login</h1>
+        <br>
+
+        <input type="text" name="username" class="input" id="username" placeholder="Username..." value="">
+        <input type="text" name="password" id="password" placeholder="Password..." value="">
+
+        <div class="action">
+           <button type="submit">Login</button>
+        </div>
+      </form>
+    </center>
+	</div><!-- /content -->
+
+</div><!-- /page -->
+
+<!-- Start of second page -->
+<div data-role="page" id="register">
+
+	<div data-role="header" data-position="fixed" style="overflow:hidden;">
+		<h1></h1>
+	    <a href="#login" data-icon="gear" class="ui-btn-right" style="top:10px">Login</a>
+	</div>
+
+	<div role="main" class="ui-content content">
+    <center>
+      <form id="frmRegister">
+        <img src="img/logo.png" class="logo" alt="logo">
+
+        <h1>Registration</h1>
+        <br>
+
+
+        <input type="text" name="cpnum" class="input" id="cpnum" placeholder="Celphone Number..." value="">
+        <input type="text" name="username" class="input" id="username" placeholder="Username..." value="">
+        <input type="text" name="password" id="password" placeholder="Password..." value="">
+        <input type="text" name="password_confirmation" class="input" id="password_confirmation" placeholder="Confirm Password..." value="">
+
+        <div class="action">
+           <button type="submit">Register</button>
+        </div>
+      </form>
+
+    </center>
+	</div><!-- /content -->
+
+</div><!-- /page -->
+
+
+<!-- Start of main page -->
+<div data-role="page" id="home">
+
+	<div data-role="header" data-position="fixed" style="overflow:hidden;">
+		<h1>Home</h1>
+	    <a href="#" data-icon="back" class="ui-btn-left" style="top:10px">Back</a>
+  <a href="#logoutconfirm" data-rel="popup" data-position-to="window" data-transition="pop" data-icon="power" class="ui-btn-right " style="top:10px">Logout</a>
+  <div data-role="popup" id="logoutconfirm" data-overlay-theme="a" data-theme="a" data-dismissible="false" style="max-width:400px;">
+        <div data-role="header" data-theme="a">
+        <h1>Confirm Logout?</h1>
+        </div>
+        <div role="main" class="ui-content">
+            <h3 class="ui-title">Are you sure you want to logout your account?</h3>
+        <center>
+          <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-rel="back" style="top:30px">Cancel</a>
+          <a href="#" id="logout" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-rel="back" data-transition="flow" style="top:30px">Confirm</a>
+        </center>
+        </div>
+    </div>
+	</div>
+
+	<div role="main" class="ui-content content">
+    <center>
+      <a href="#book" class="ui-btn ui-corner-all ui-shadow">Book</a>
+      <a href="#reserve" id="reserve" class="ui-btn ui-corner-all ui-shadow">Reservations</a>
+      <a href="#" class="ui-btn ui-corner-all ui-shadow">Drivers</a>
+      <a href="#" class="ui-btn ui-corner-all ui-shadow">Profile</a>
+    </center>
+	</div><!-- /content -->
+
+  <div data-role="footer"  data-position="fixed" style="overflow:hidden;height:2rem">
+		    <h4 style="text-align:center;margin-top:-1.5rem">Tribook 2021</h4>
+	</div>
+
+</div><!-- /page -->
+
+
+<!-- Start of main page -->
+<div data-role="page" id="book">
+
+	<div data-role="header" data-position="fixed" style="overflow:hidden;">
+		<h1>Booking</h1>
+	    <a href="#" data-icon="back" class="ui-btn-left" style="top:10px">Back</a>
+  <a href="#logoutconfirm" data-rel="popup" data-position-to="window" data-transition="pop" data-icon="power" class="ui-btn-right " style="top:10px">Logout</a>
+  <div data-role="popup" id="logoutconfirm" data-overlay-theme="a" data-theme="a" data-dismissible="false" style="max-width:400px;">
+        <div data-role="header" data-theme="a">
+        <h1>Confirm Logout?</h1>
+        </div>
+        <div role="main" class="ui-content">
+            <h3 class="ui-title">Are you sure you want to logout your account?</h3>
+        <center>
+          <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-rel="back" style="top:30px">Cancel</a>
+          <a href="#" id="logout" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-rel="back" data-transition="flow" style="top:30px">Confirm</a>
+        </center>
+        </div>
+    </div>
+	</div>
+
+	<div role="main" class="ui-content content">
+      <h1 class="title">Book A Ride</h1>
+      <form id="booking">
+        <div>
+          <fieldset data-role="controlgroup" data-type="horizontal">
+              <legend>Driver</legend>
+              <input type="radio" name="mode" id="radio-choice-h-2a" value="on" checked="checked">
+              <label for="radio-choice-h-2a">random</label>
+              <input type="radio" name="mode" id="radio-choice-h-2b" value="off">
+              <label for="radio-choice-h-2b">select</label>
+          </fieldset>
+        </div>
+        <center>
+          <div id="drivers">
+                    <select id="title-filter-menu" data-native-menu="false" class="filterable-select">
+                      </select>
+          <br><hr>
+          </div>
+
+          <input type="text" name="pickup" class="input" id="pickup" placeholder="Pickup Location" value="">
+          <input type="text" name="destination" class="input" id="destination" placeholder="Destination" value="">
+          <input type="date" name="book_date" id="book_date" placeholder="Date" value="">
+          <input type="time" name="book_time" class="input" id="book_time" placeholder="Time" value="">
+
+          <div class="action">
+             <button type="submit">Book</button>
+          </div>
+        </center>
+      </form>
+	</div><!-- /content -->
+
+  <div data-role="footer"  data-position="fixed" style="overflow:hidden;height:2rem">
+		    <h4 style="text-align:center;margin-top:-1.5rem">Tribook 2021</h4>
+	</div>
+
+</div><!-- /page -->
+
+
+
+<!-- Start of main page -->
+<div data-role="page" id="reserve">
+
+	<div data-role="header" data-position="fixed" style="overflow:hidden;">
+		<h1>Reservations</h1>
+	    <a href="#" data-icon="back" class="ui-btn-left" style="top:10px">Back</a>
+  <a href="#logoutconfirm" data-rel="popup" data-position-to="window" data-transition="pop" data-icon="power" class="ui-btn-right " style="top:10px">Logout</a>
+  <div data-role="popup" id="logoutconfirm" data-overlay-theme="a" data-theme="a" data-dismissible="false" style="max-width:400px;">
+        <div data-role="header" data-theme="a">
+        <h1>Confirm Logout?</h1>
+        </div>
+        <div role="main" class="ui-content">
+            <h3 class="ui-title">Are you sure you want to logout your account?</h3>
+        <center>
+          <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-rel="back" style="top:30px">Cancel</a>
+          <a href="#" id="logout" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-rel="back" data-transition="flow" style="top:30px">Confirm</a>
+        </center>
+        </div>
+    </div>
+	</div>
+
+	<div role="main" class="content">
+    <center>
+      <table data-role="table" class="ui-responsive table-stripe">
+             <thead>
+               <tr>
+                 <th>Transaction ID</th>
+                 <th>Pickup Point</th>
+                 <th>Destination Point</th>
+                 <th>Date</th>
+                 <th>Time</th>
+                 <th data-priority="4">Status</th>
+               </tr>
+             </thead>
+             <tbody id="tablereservation">
+             </tbody>
+           </table>
+    </center>
+	</div><!-- /content -->
+
+  <div data-role="footer"  data-position="fixed" style="overflow:hidden;height:2rem">
+		    <h4 style="text-align:center;margin-top:-1.5rem">Tribook 2021</h4>
+	</div>
+
+</div><!-- /page -->
+
+
+	<!-- </div>
+	<div data-role="footer"  data-position="fixed" style="overflow:hidden;">
+		    <h4 style="text-align:center;">I'm the footer</h4>
+	</div> -->
+  
+
+  <script>
+
+    $('#drivers').hide();
+    function checksession(){
+      token=storage.getItem("token")
+      $.ajax({
+        url: host+"/api/checksession",
+        type:'get',
+        headers:{
+          Accept:'application/json',
+          Authorization:'Bearer ' + token
+        },
+        success: function(result){
+          window.location.href="#home"
+          },
+        error: function(result){
+          window.location.href="#login"
+          },
+    });
+    }
+
+    checksession();
+
+
+    
+  toastr.options = {
+    "closeButton": false,
+    "debug": false,
+    "newestOnTop": true,
+    "progressBar": false,
+    "positionClass": "toast-top-full-width",
+    "preventDuplicates": false,
+    "showDuration": "3000",
+    "hideDuration": "1000",
+    "timeOut": "3000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+  }
+
+  
+  //var value = storage.getItem(key); // Pass a key name to get its value.
+  //storage.setItem(key, value) // Pass a key name and its value to add or update that key.
+  //storage.removeItem(key) // Pass a key name to remove that key from storage.
+    $('#frmlogin').submit((e)=>{
+      e.preventDefault();
+      $.ajax({
+        url: host+"/api/login",
+        type:"post",
+        headers:{
+          Accept:'application/json'
+        },
+        data:$("#frmlogin").serialize(),
+        success: function(result){
+            console.log(result)
+              storage.setItem("token", result.token)
+              storage.setItem("userid", result.user.id)
+              checksession();
+              toastr.success("Login successful")
+          },
+        error: function(result){
+     
+          console.log(result)
+            result.responseJSON.errors  &&
+            Object.entries(result.responseJSON.errors).map(([name,val])=>{
+              toastr.error(val)
+              console.log('[name='+name+']')
+              //$('[name='+name+']').css({'color':'red'})
+            })
+          },
+        
+    });
+    })
+
+    $('#frmRegister').submit((e)=>{
+      e.preventDefault();
+      $.ajax({
+        url: host+"/api/register",
+        type:"post",
+        headers:{
+          Accept:'application/json',
+          Authorization:'Bearer ' + token
+        },
+        data:$("#frmRegister").serialize(),
+        success: function(result){
+          window.location.href="#login"
+          toastr.success("Registration Successful")
+          checksession();
+          },
+        error: function(result){
+     
+            if(result.status==422){
+              result.responseJSON.errors  &&
+              Object.entries(result.responseJSON.errors).map(([name,val])=>{
+                toastr.error(val)
+                console.log('[name='+name+']')
+                //$('[name='+name+']').css({'color':'red'})
+              })
+            }
+          },
+        
+    
+    });
+    })
+
+    $('#logout').click((e)=>{
+      e.preventDefault();
+      storage.removeItem("token") // Pass a key name to remove that key from storage.
+      storage.removeItem("userid") // Pass a key name to remove that key from storage.
+      checksession();
+      toastr.success("logout successful")
+    })
+    
+    $('input[name="mode"]').change((e)=>{
+      if(e.currentTarget.value=='off')
+        $('#drivers').show();
+      else
+      $('#drivers').hide();
+    })
+
+    $('#booking').submit((e)=>{
+      let did=$('#title-filter-menu>option').filter((i,option)=>option.innerHTML==$('.filterable-select')[0].innerHTML)
+      let val=did.val()
+      let fd=$('#booking').serializeArray();
+      fd.push({name:'driver_id',value:val})
+      e.preventDefault();
+      ajaxreq({
+        data:fd,
+        url:'/api/book',
+        type:'post',
+        success:(res)=>{
+          console.log(res)
+          if(res.status=='success'){
+            window.location.href="#home"
+            toastr.success("Booking Successful")
+          }
+        },
+        error:showinputerrors
+        
+      })
+    })
+    $('#reserve').click((e)=>{
+     reservations();
+    })
+    $('a[data-icon="back"]').click((e)=>{
+      e.preventDefault();
+      window.history.back();
+    })
+  </script>
+  <script>
+    ( function( $ ) {
+      function pageIsSelectmenuDialog( page ) {
+          var isDialog = false,
+              id = page && page.attr( "id" );
+          $( ".filterable-select" ).each( function() {
+              if ( $( this ).attr( "id" ) + "-dialog" === id ) {
+                  isDialog = true;
+                  return false;
+              }
+          });
+          return isDialog;
+      }
+      $.mobile.document
+          // Upon creation of the select menu, we want to make use of the fact that the ID of the
+          // listview it generates starts with the ID of the select menu itself, plus the suffix "-menu".
+          // We retrieve the listview and insert a search input before it.
+          .on( "selectmenucreate", ".filterable-select", function( event ) {
+              var input,
+                  selectmenu = $( event.target ),
+                  list = $( "#" + selectmenu.attr( "id" ) + "-menu" ),
+                  form = list.jqmData( "filter-form" );
+              // We store the generated form in a variable attached to the popup so we avoid creating a
+              // second form/input field when the listview is destroyed/rebuilt during a refresh.
+              if ( !form ) {
+                  input = $( "<input data-type='search'></input>" );
+                  form = $( "<form></form>" ).append( input );
+                  input.textinput();
+                  list
+                      .before( form )
+                      .jqmData( "filter-form", form ) ;
+                  form.jqmData( "listview", list );
+              }
+              // Instantiate a filterable widget on the newly created selectmenu widget and indicate that
+              // the generated input form element is to be used for the filtering.
+              selectmenu
+                  .filterable({
+                      input: input,
+                      children: "> option[value]"
+                  })
+                  // Rebuild the custom select menu's list items to reflect the results of the filtering
+                  // done on the select menu.
+                  .on( "filterablefilter", function() {
+                      selectmenu.selectmenu( "refresh" );
+                  });
+          })
+          // The custom select list may show up as either a popup or a dialog, depending on how much
+          // vertical room there is on the screen. If it shows up as a dialog, then the form containing
+          // the filter input field must be transferred to the dialog so that the user can continue to
+          // use it for filtering list items.
+          .on( "pagecontainerbeforeshow", function( event, data ) {
+              var listview, form;
+              // We only handle the appearance of a dialog generated by a filterable selectmenu
+              if ( !pageIsSelectmenuDialog( data.toPage ) ) {
+                  return;
+              }
+              listview = data.toPage.find( "ul" );
+              form = listview.jqmData( "filter-form" );
+              // Attach a reference to the listview as a data item to the dialog, because during the
+              // pagecontainerhide handler below the selectmenu widget will already have returned the
+              // listview to the popup, so we won't be able to find it inside the dialog with a selector.
+              data.toPage.jqmData( "listview", listview );
+              // Place the form before the listview in the dialog.
+              listview.before( form );
+          })
+          // After the dialog is closed, the form containing the filter input is returned to the popup.
+          .on( "pagecontainerhide", function( event, data ) {
+              var listview, form;
+              // We only handle the disappearance of a dialog generated by a filterable selectmenu
+              if ( !pageIsSelectmenuDialog( data.toPage ) ) {
+                  return;
+              }
+              //listview = data.prevPage.jqmData( "listview" ),
+      listview = data.toPage.find( "ul" );
+listview = data.toPage.jqmData( "listview", listview );
+              form = listview.jqmData( "filter-form" );
+              // Put the form back in the popup. It goes ahead of the listview.
+              listview.before( form );
+          });
+      })( jQuery );
+  </script>
+  
+  <script type="text/javascript">
+    function driverlist(){
+       ajaxreq({
+        url: "/api/drivers",
+        type:'get',
+        success: function(result){
+          if(result.drivers)
+          {
+            $('#title-filter-menu').html('<option>Select Driver...</option>');
+            result.drivers.map((driver)=>{
+              $('#title-filter-menu').append('<option value="' + driver.id + '">' + driver.name + '</option>');
+            })
+          }
+        },
+        error:(res)=>{
+          toastr.error('error fetching drivers list')
+        }
+      })
+    }
+    function reservations(){
+       ajaxreq({
+        url: "/api/reservations",
+        type:'get',
+        success: function(result){
+          console.log(result)
+          if(result.booking){
+            $('#tablereservation').html('')
+            result.booking.map((book)=>{
+              let date=new Date(book.book_date)
+              date=`${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`
+            $('#tablereservation').append(`
+              <tr>
+                  <td>${book.id}</td>
+                  <td>${book.pickup}</td>
+                  <td>${book.destination}</td>
+                  <td>${date.toString()}</td>
+                  <td>${book.book_time}</td>
+                  <td>${book.status}</td>
+              </tr>
+            `)
+            })
+          }
+        },
+        error:(res)=>{
+          toastr.error('error fetching drivers list')
+        }
+      })
+    }
+    $(document).ready(function() {
+     driverlist();
+    });
+      /*$.ajax({
+        url: host+"/api/drivers",
+        type:'get',
+        headers:{
+          Accept:'application/json',
+          Authorization:'Bearer ' + token
+        },
+        success: function(result){
+          result.drivers.map((driver)=>{
+            $('#driver').append('<option value="' + driver.id + '">' + driver.name + '</option>');
+          })
+          },
+        error:(res)=>{
+          toastr.error('error fetching drivers list')
+        }
+        });
+    });*/
+    function ajaxreq(args){
+      let ar={...args,
+        headers:{
+          Accept:'application/json',
+          Authorization:'Bearer ' + token
+        },
+      };
+      ar.type=args.type || 'get';
+      ar.url=host+args.url;
+      $.ajax(ar);
+    };
+    function showinputerrors(res){
+      if(res.status==422){
+        res.responseJSON.errors  &&
+        Object.entries(res.responseJSON.errors).map(([name,val])=>{
+          toastr.error(val)
+          console.log('[name='+name+']')
+          //$('[name='+name+']').css({'color':'red'})
+        })
+      }
+    }
+
+  </script>
+</body>
+</html>

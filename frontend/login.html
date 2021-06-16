@@ -1,0 +1,26 @@
+<ons-page>
+  <ons-toolbar>
+    <div class="center">Lists</div>
+  </ons-toolbar>
+
+  <ons-list>
+    <ons-lazy-repeat id="infinite-list"></ons-lazy-repeat>
+  </ons-list>
+</ons-page>
+
+<script>
+  ons.ready(function() {
+  var infiniteList = document.getElementById('infinite-list');
+
+  infiniteList.delegate = {
+    createItemContent: function(i) {
+      return ons.createElement('<ons-list-item>Item ' + i + '</ons-list-item>');
+    },
+    countItems: function() {
+      return 10000;
+    }
+  };
+
+  infiniteList.refresh();
+});
+</script>

@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Tricycle;
 
-class tricycleFactory extends Factory
+class TricycleFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.

@@ -1,0 +1,41 @@
+{
+    "name": "Laravel",
+    "service": "cli",
+    "remoteUser": "user",
+    "shutdownAction": "stopCompose",
+    "workspaceFolder": "/workspaces/laravel",
+    "dockerComposeFile": "docker-compose.yml",
+    "customizations": {
+        // Configure properties specific to VS Code.
+        "vscode": {
+            // Set *default* container specific settings.json values on container create.
+            "settings": {},
+            "extensions": [
+                "TechieCouch.laravel-php-essentials",
+                "eamodio.gitlens",
+                "mhutchie.git-graph",
+                "rexshi.phpdoc-comment-vscode-plugin"
+                // "zxh404.vscode-proto3"
+            ]
+        }
+    }
+    // "customizations": {
+    //     "vscode": {
+    //         "extensions": [
+    //             "bmewburn.vscode-intelephense-client",
+    //             "eamodio.gitlens",
+    //             "EditorConfig.EditorConfig",
+    //             "mikestead.dotenv",
+    //             "onecentlin.laravel-blade",
+    //             "TechieCouch.laravel-php-essentials"
+    //         ]
+    //     }
+    // }
+    // "customizations": {
+    //     // Configure properties specific to VS Code.
+    //     "vscode": {
+    //       // Add the IDs of extensions you want installed when the container is created.
+    //       "extensions": [ "TechieCouch.laravel-php-essentials"]
+    //     }
+    //   }
+}

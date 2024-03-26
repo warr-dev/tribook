@@ -9,7 +9,7 @@ services:
     # command: crond -f -l 8
     volumes:
       - ../:/workspaces/laravel
-      - C:\Users\GANI\.ssh:/home/user/.ssh
+      # - C:\Users\GANI\.ssh:/home/user/.ssh
       # - ./ssh:/home/user/.ssh
       #- ./cli/cron:/etc/periodic/1min
       # - ./cli/test.txt:/test.txt

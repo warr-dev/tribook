@@ -46,3 +46,12 @@ This can be run using
 - you can also convert webclient to mobile app
 - see also 
     - [screens](screens.md)
+
+
+### Others
+
+#### Setting up ssh
+ this project contains devcontainer (vscode preconfigured) together with dependencies for easier get started on development, however, if you want to use ssh on pushing on repository, you had to setup ssh. to set it up:
+ - open terminal inside container type `ssh-keygen`
+ - copy the output public key xxx.pub
+ - add ssh key to your github account

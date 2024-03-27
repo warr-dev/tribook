@@ -1,3 +1,12 @@
+## Tribook
+This is a tricycle booking app made with html css and javascript for frontend and php backend. It uses JQuery mobile library. For API backend, it uses PHP with Laravel framework.
+
+Features includes:
+- booking
+- pickup
+- tricycle/driver
+- transaction history
+
 ## How to run (development)
 ---
 This can be run using 

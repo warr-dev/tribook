@@ -18,7 +18,7 @@
   <script>
     var storage = window.localStorage;
     let token = storage.getItem("token")
-    let host = storage.getItem("host") || "https://tribookv1.warrdev.com"
+    let host = storage.getItem("host") || "https://tribook.warrdev.site"
     //host="192.168.43.97:8000"
   </script>
   <style>
@@ -283,6 +283,7 @@
       </center>
     </div><!-- /content -->
     <script>
+      document.querySelector('#ip').value=host
       function setip() {
         host = document.querySelector('#ip').value
         storage.setItem("host", host)

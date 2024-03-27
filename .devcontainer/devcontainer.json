@@ -14,7 +14,8 @@
                 "TechieCouch.laravel-php-essentials",
                 "eamodio.gitlens",
                 "mhutchie.git-graph",
-                "rexshi.phpdoc-comment-vscode-plugin"
+                "rexshi.phpdoc-comment-vscode-plugin",
+                "ritwickdey.LiveServer"
                 // "zxh404.vscode-proto3"
             ]
         }
